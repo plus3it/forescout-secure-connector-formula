@@ -1,6 +1,5 @@
 name: forescout-secure-connector
-os: RedHat, CentOS, Windows
-os_family: RedHat, Windows
-version: 0.1.0
+os: RedHat, CentOS
+os_family: RedHat
 summary: Forescout Secure Connector
 description: Forescout Secure Connector
