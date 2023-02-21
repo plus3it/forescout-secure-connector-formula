@@ -18,9 +18,26 @@ ForeScout SecureConnector Archive Extracted:
     - group: root
     - mode: 0700
 
+Relax pkgverify options:
+  file.managed:
+    - contents: '%_pkgverify_level none'
+    - group: 'root'
+    - mode: '0600'
+    - name: '/etc/rpm/macros.verify'
+    - user: 'root'
+    - selinux:
+        serange: 's0'
+        serole: 'object_r'
+        setype: 'etc_t'
+        seuser: 'system_u'
+    - unless:
+      - '[[ $( rpm -qf /etc/os-release --qf "%{release}\n" | sed "s/^.*\.el//" ) -lt 8 ]]'
+
 {%- if forescout.package.daemon.get('source') %}
 ForeScout SecureConnector Daemon Installed:
   pkg.installed:
+    - setopt:
+      - tsflags=nocrypto
     - sources:
       - {{ forescout.package.daemon.name }}: {{ forescout.package.daemon.source }}
     - skip_verify: True
@@ -35,3 +52,7 @@ ForeScout SecureConnector Installed:
     - require:
       - archive: ForeScout SecureConnector Archive Extracted
       - pkg: ForeScout SecureConnector Dependencies Installed
+
+Restore pkgverify options:
+  file.absent:
+    - name: '/etc/rpm/macros.verify'
