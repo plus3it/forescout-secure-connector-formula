@@ -1,5 +1,6 @@
 {#- Get the `tplroot` from `tpldir` #}
 {%- set tplroot = tpldir.split('/')[0] %}
+{%- set RpmVrfySetting = '/etc/rpm/forescout-daemon.rpm-verify' %}
 
 {%- from tplroot ~ "/map.jinja" import mapdata as forescout with context %}
 
@@ -23,7 +24,7 @@ Relax pkgverify options:
     - contents: '%_pkgverify_level none'
     - group: 'root'
     - mode: '0600'
-    - name: '/etc/rpm/macros.verify'
+    - name: '{{ RpmVrfySetting }}'
     - user: 'root'
     - selinux:
         serange: 's0'
@@ -55,4 +56,4 @@ ForeScout SecureConnector Installed:
 
 Restore pkgverify options:
   file.absent:
-    - name: '/etc/rpm/macros.verify'
+    - name: '{{ RpmVrfySetting }}'
