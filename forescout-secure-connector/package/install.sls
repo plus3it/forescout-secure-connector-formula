@@ -60,4 +60,4 @@ Restore pkgverify options:
   file.absent:
     - name: '{{ RpmVrfySetting }}'
     - require:
-      - pkg: ForeScout SecureConnector Daemon Installed
+      - pkg: ForeScout SecureConnector Installed
