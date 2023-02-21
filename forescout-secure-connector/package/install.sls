@@ -32,7 +32,7 @@ Relax pkgverify options:
         setype: 'etc_t'
         seuser: 'system_u'
     - unless:
-      - '[[ $( rpm -qf /etc/os-release --qf "%{release}\n" | sed "s/^.*\.el//" ) -lt 8 ]]'
+      - '[[ {{ grains["osmajorrelease"] }} -lt 8 ]]'
 
 {%- if forescout.package.daemon.get('source') %}
 ForeScout SecureConnector Daemon Installed:
