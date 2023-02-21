@@ -1,6 +1,6 @@
 {#- Get the `tplroot` from `tpldir` #}
 {%- set tplroot = tpldir.split('/')[0] %}
-{%- set RpmVrfySetting = '/etc/rpm/forescout-daemon.rpm-verify' %}
+{%- set RpmVrfySetting = '/etc/rpm/macros.verify' %}
 
 {%- from tplroot ~ "/map.jinja" import mapdata as forescout with context %}
 
