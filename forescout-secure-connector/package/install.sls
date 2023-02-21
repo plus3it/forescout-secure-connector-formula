@@ -42,6 +42,8 @@ ForeScout SecureConnector Daemon Installed:
     - sources:
       - {{ forescout.package.daemon.name }}: {{ forescout.package.daemon.source }}
     - skip_verify: True
+    - require:
+      - file: Relax pkgverify options
     - require_in:
       - cmd: ForeScout SecureConnector Installed
 {%- endif %}
@@ -57,3 +59,5 @@ ForeScout SecureConnector Installed:
 Restore pkgverify options:
   file.absent:
     - name: '{{ RpmVrfySetting }}'
+    - require:
+      - pkg: ForeScout SecureConnector Daemon Installed
