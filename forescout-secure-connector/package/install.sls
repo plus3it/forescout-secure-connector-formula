@@ -4,23 +4,11 @@
 
 {%- from tplroot ~ "/map.jinja" import mapdata as forescout with context %}
 
-ForeScout OS Log-Dir Setup:
-  file.directory:
-    - group: 'root'
-    - mode: '0755'
-    - name: '/var/log/forescout'
-    - selinux:
-        serange: 's0'
-        serole: 'object_r'
-        setype: 'lib_t'
-        seuser: 'system_u'
-
 ForeScout SecureConnector Dependencies Installed:
   pkg.installed:
     - pkgs:
         - bzip2
         - wget
-    - user: 'root'
 
 ForeScout SecureConnector Archive Extracted:
   archive.extracted:
@@ -67,26 +55,6 @@ ForeScout SecureConnector Installed:
     - require:
       - archive: ForeScout SecureConnector Archive Extracted
       - pkg: ForeScout SecureConnector Dependencies Installed
-
-ForeScout Symlink to OS Log-Dir:
-  file.symlink:
-    - group: 'root'
-    - makedirs: True
-    - mode: '0755'
-    - name: '/usr/lib/forescout/bin/log'
-    - require:
-      - file: Forescout Zap Default Log-Dir
-    - target: '/var/log/forescout'
-    - user: 'root'
-
-Forescout Zap Default Log-Dir:
-  file.absent:
-    - name: '/usr/lib/forescout/bin/log'
-    - onlyif:
-      - '[[ -d /usr/lib/forescout/bin/log ]]'
-    - require:
-      - file: ForeScout OS Log-Dir Setup
-      - cmd: ForeScout SecureConnector Installed
 
 Restore pkgverify options:
   file.absent:
