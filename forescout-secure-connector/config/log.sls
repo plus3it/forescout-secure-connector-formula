@@ -27,4 +27,3 @@ Forescout Zap Default Log-Dir:
       - '[[ -d /usr/lib/forescout/bin/log ]]'
     - require:
       - file: ForeScout OS Log-Dir Setup
-      - cmd: ForeScout SecureConnector Installed
