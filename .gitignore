@@ -43,3 +43,7 @@ Temporary Items
 .apdisk
 
 *.bundle
+
+# tardigrade-ci
+.tardigrade-ci
+tardigrade-ci/
