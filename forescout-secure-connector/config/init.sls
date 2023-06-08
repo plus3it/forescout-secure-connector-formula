@@ -1,3 +1,3 @@
 include:
   - .log
-  - .fix-ownership
+  - .directories
