@@ -1,2 +1,3 @@
 include:
   - .log
+  - .fix-ownership
