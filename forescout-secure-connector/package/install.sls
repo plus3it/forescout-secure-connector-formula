@@ -56,7 +56,7 @@ ForeScout SecureConnector Systemd Service File:
         Description=ForeScout SecureConnector
 
         [Service]
-        ExecStart={{ forescout.package.install_dir }}/ForeScoutSecureConnector
+        ExecStart={{ forescout.package.install_dir }}/bin/ForeScoutSecureConnector
         [Install]
         WantedBy=multi-user.target
     - user: root
