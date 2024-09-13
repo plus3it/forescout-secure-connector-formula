@@ -62,11 +62,6 @@ ForeScout SecureConnector Systemd Service File:
     - user: root
     - group: root
     - mode: 0644
-    - selinux:
-        serange: 's0'
-        serole: 'object_r'
-        setype: 'etc_t'
-        seuser: 'system_u'
 
 ForeScout SecureConnector Installed:
   cmd.run:
