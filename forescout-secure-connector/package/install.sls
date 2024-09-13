@@ -51,7 +51,7 @@ ForeScout SecureConnector Daemon Installed:
 ForeScout SecureConnector Systemd Service File:
   file.managed:
     - name: /etc/systemd/system/SecureConnector.service
-    - content: |
+    - contents: |
         [Unit]
         Description=ForeScout SecureConnector
 
