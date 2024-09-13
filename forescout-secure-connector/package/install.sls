@@ -48,12 +48,33 @@ ForeScout SecureConnector Daemon Installed:
       - cmd: ForeScout SecureConnector Installed
 {%- endif %}
 
+ForeScout SecureConnector Systemd Service File:
+  file.managed:
+    - name: /etc/systemd/system/SecureConnector.service
+    - content: |
+        [Unit]
+        Description=ForeScout SecureConnector
+
+        [Service]
+        ExecStart={{ forescout.package.install_dir }}/ForeScoutSecureConnector
+        [Install]
+        WantedBy=multi-user.target
+    - user: root
+    - group: root
+    - mode: 0644
+    - selinux:
+        serange: 's0'
+        serole: 'object_r'
+        setype: 'etc_t'
+        seuser: 'system_u'
+
 ForeScout SecureConnector Installed:
   cmd.run:
     - name: {{ forescout.package.archive.extract_directory }}/{{ forescout.package.install_cmd }}
     - unless: {{ forescout.package.installed_test }}
     - require:
       - archive: ForeScout SecureConnector Archive Extracted
+      - file: ForeScout SecureConnector Systemd Service File
       - pkg: ForeScout SecureConnector Dependencies Installed
 
 Restore pkgverify options:
