@@ -7,9 +7,17 @@
 include:
   - {{ sls_package_install }}
 
-ForeScout Service Running:
-  service.running:
+ForeScout Service Enabled:
+  service.enabled:
     - name: {{ forescout.service.name }}
     - enable: True
     - watch:
       - sls: {{ sls_package_install }}
+
+ForeScout Service Running:
+  service.running:
+    - name: {{ forescout.service.name }}
+    - watch:
+      - sls: {{ sls_package_install }}
+    - require:
+      - service: ForeScout Service Enabled

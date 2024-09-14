@@ -27,6 +27,12 @@ ForeScout SecureConnector Dir Removed:
     - require:
       - cmd: ForeScout SecureConnector Removed
 
+ForeScout SecureConnector Systemd Service File Removed:
+  file.absent:
+    - name: /etc/systemd/system/SecureConnector.service
+    - require:
+      - cmd: ForeScout SecureConnector Removed
+
 ForeScout SecureConnector Archive Removed:
   file.absent:
     - name: {{ forescout.package.archive.extract_directory }}
